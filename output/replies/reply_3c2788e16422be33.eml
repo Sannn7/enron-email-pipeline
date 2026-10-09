@@ -1,0 +1,28 @@
+To: exchange.administrator@enron.com
+Subject:
+ [Duplicate Notice] Re: WARNING:  Your mailbox is approaching the size limit
+Date: Fri, 09 Oct 2026 15:52:55 +0000
+References: <28605930.1075859123725.JavaMail.evans@thyme>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+
+This is an automated notification from the Email Deduplication System.
+
+Your email has been identified as a potential duplicate:
+
+  Your Email (Flagged):
+    Message-ID:  <28605930.1075859123725.JavaMail.evans@thyme>
+    Date Sent:   2001-12-23T07:00:03Z
+    Subject:     WARNING:  Your mailbox is approaching the size limit
+
+  Original Email on Record:
+    Message-ID:  <11827399.1075861318166.JavaMail.evans@thyme>
+    Date Sent:   2001-11-13T07:00:05Z
+
+  Similarity Score: 99.47%
+
+If this was NOT a duplicate and you intended to send this email,
+please reply with CONFIRM to restore it to active status.
+
+No action is required if this is indeed a duplicate.

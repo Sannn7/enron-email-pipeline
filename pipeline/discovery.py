@@ -19,11 +19,19 @@ def _hidden(name: str) -> bool:
     return name.startswith(".")
 
 
+def resolve_mailboxes(maildir: Path, mailboxes: list[str]) -> list[str]:
+    """["all"] means every visible mailbox directory under maildir."""
+    if mailboxes == ["all"]:
+        return sorted(p.name for p in maildir.iterdir() if p.is_dir() and not _hidden(p.name))
+    return mailboxes
+
+
 def discover(maildir: Path, mailboxes: list[str]) -> list[DiscoveredFile]:
     """Return every regular, non-hidden file in the given mailboxes, sorted by source_file.
 
-    Missing mailboxes are logged and skipped, never fatal.
+    Missing mailboxes are logged and skipped, never fatal. ["all"] selects every mailbox.
     """
+    mailboxes = resolve_mailboxes(maildir, mailboxes) if maildir.is_dir() else mailboxes
     found: list[DiscoveredFile] = []
     for mailbox in mailboxes:
         root = maildir / mailbox
