@@ -1,7 +1,8 @@
 -- Sample queries for data/enron.db
 -- "Result" lines are from the main-5 database (skilling-j, sager-e, arnold-j,
--- steffes-j, farmer-d): 29,650 emails, before copy collapse / dedup (run 2026-10-09).
--- Folder copies are separate rows until the copy-collapse stage marks them is_copy = 1.
+-- steffes-j, farmer-d) after a full `python main.py --ner` run (2026-10-09), re-checked
+-- against the database. Queries 1-7 count every stored row (29,650 emails), so folder copies
+-- (is_copy = 1) are included; add `WHERE is_copy = 0` to count unique emails (15,678).
 
 -- 1. Emails per sender (top 5).
 -- Expected: one row per from_address with its count, largest first.
@@ -73,7 +74,9 @@ ORDER BY year;
 
 -- 8. Flagged duplicates and their originals (populated by the dedup stage).
 -- Expected: one row per flagged email with the original it duplicates and the score.
--- Result before dedup: no rows.
+-- Result: 436 rows (one per flagged duplicate, same as duplicates_report.csv). First row:
+--         <3308296.1075852669757...> 2001-10-02T10:49:07Z -> <2852567.1075852669803...>
+--         2001-10-02T10:31:35Z | 99.74 | notification_sent 1 (one of the two live sends)
 SELECT d.message_id AS duplicate_message_id, d.date AS duplicate_date,
        o.message_id AS original_message_id, o.date AS original_date,
        d.similarity_score, d.notification_sent

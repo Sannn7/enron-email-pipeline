@@ -33,8 +33,6 @@ class Config:
     # bonuses
     incremental: bool = True
     full_reingest: bool = False
-    threads: bool = True
-    thread_window_days: int = 14
     batch_size: int = 1000
     ner: bool = False
 
@@ -84,8 +82,6 @@ def build_parser() -> argparse.ArgumentParser:
     g = p.add_argument_group("bonuses")
     g.add_argument("--no-incremental", dest="incremental", action="store_false")
     g.add_argument("--full-reingest", action="store_true")
-    g.add_argument("--no-threads", dest="threads", action="store_false")
-    g.add_argument("--thread-window-days", type=int, default=d.thread_window_days)
     g.add_argument("--batch-size", type=int, default=d.batch_size)
     g.add_argument("--ner", action="store_true",
                    help="named-entity extraction with spaCy (bonus; needs spacy + en_core_web_sm)")
@@ -127,8 +123,6 @@ def parse_args(argv: list[str] | None = None) -> Config:
         mcp_config=args.mcp_config,
         incremental=args.incremental,
         full_reingest=args.full_reingest,
-        threads=args.threads,
-        thread_window_days=args.thread_window_days,
         batch_size=args.batch_size,
         ner=args.ner,
     )

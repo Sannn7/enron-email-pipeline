@@ -317,8 +317,8 @@ through review flags, not manually verified line by line.
   | Incremental processing | Not done | Re-runs are safe (existing `message_id`s are skipped and notification state is kept), but every file is re-parsed. Next step: skip known `source_file`s before parsing. |
   | Performance (full 517k dataset) | Not done | Only basic efficiency: 1,000-row batched inserts, dedup blocking by sender and subject, and a length pre-filter before fuzzy matching. Planned: a multiprocessing parse pool with a single SQLite writer, WAL mode, indexes built after load, and a serial-vs-parallel benchmark with an identical-output check. |
 
-  `--no-incremental`, `--full-reingest`, `--no-threads` and `--thread-window-days` appear in `--help` but
-  are reserved for the unbuilt bonuses and currently have **no effect**.
+  `--no-incremental` and `--full-reingest` appear in `--help` but are reserved for incremental processing
+  and currently have **no effect**.
 - **NER limitations on messy email text** (spaCy's small model was trained on news and web text, not email):
   - **Fragments mislabelled.** Common words and fragments are mislabelled: `FYI` and `Daren` as ORG, `TX` as
     ORG (not GPE), `MMBtu` and `Subject` as PERSON, `Password` as PERSON, and URLs absorbed into ORG spans.
