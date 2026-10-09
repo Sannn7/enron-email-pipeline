@@ -1,0 +1,56 @@
+{
+  "fixture_id": "F05_bcc",
+  "category": "BCC present",
+  "why_chosen": "Bcc folded over 3 lines; like all Enron files, Bcc mirrors Cc exactly (stored as given). Also an Outlook reply chain.",
+  "status": "ok",
+  "fields": {
+    "message_id": "<5859433.1075862416177.JavaMail.evans@thyme>",
+    "date": "2001-11-08T15:26:35Z",
+    "from_address": "tracy.geaccone@enron.com",
+    "to_addresses": [
+      "steve.gilbert@enron.com"
+    ],
+    "subject": "RE: 4th Quarter Forecast Meetings Canceled",
+    "source_file": "maildir/geaccone-t/deleted_items/264.",
+    "cc_addresses": [
+      "john.keiser@enron.com",
+      "allen.cohrs@enron.com",
+      "john.fiscus@enron.com",
+      "dana.jones@enron.com",
+      "jane.joyce@enron.com",
+      "stephanie.korbelik@enron.com"
+    ],
+    "bcc_addresses": [
+      "john.keiser@enron.com",
+      "allen.cohrs@enron.com",
+      "john.fiscus@enron.com",
+      "dana.jones@enron.com",
+      "jane.joyce@enron.com",
+      "stephanie.korbelik@enron.com"
+    ],
+    "x_from": "Geaccone, Tracy </O=ENRON/OU=NA/CN=RECIPIENTS/CN=TGEACCO>",
+    "x_to": "Gilbert, Steve </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Sgilbe2>",
+    "x_cc": "Keiser, John </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Jkeiser>, Cohrs, Allen </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Acohrs>, Fiscus, John </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Jfiscus>, Jones, Dana </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Djones>, Joyce, Jane </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Jjoyce>, Korbelik, Stephanie </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Skorbel>",
+    "x_bcc": null,
+    "x_folder": "\\TGEACCO (Non-Privileged)\\Geaccone, Tracy\\Deleted Items",
+    "x_origin": "Geaccone-T",
+    "content_type": "text/plain; charset=us-ascii",
+    "has_attachment": false,
+    "attachments": []
+  },
+  "body": {
+    "starts_with": "I think we need to come clean and put all upsides in our numbers.",
+    "ends_with": "I think we need to come clean and put all upsides in our numbers.",
+    "length": 65
+  },
+  "forwarded_content": null,
+  "quoted_content": {
+    "starts_with": "-----Original Message-----\nFrom: \tGilbert, Steve  \nSent:\tWednesday, No",
+    "ends_with": "en canceled.  Rod and I will meet with Stan separately.\n\nThanks\n\nTracy",
+    "length": 1355
+  },
+  "review_flags": [
+    "Bcc == Cc here, as in every Enron Bcc seen. README note."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

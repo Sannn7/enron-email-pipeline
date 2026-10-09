@@ -1,0 +1,43 @@
+{
+  "fixture_id": "F11_encoding_junk",
+  "category": "Encoding junk",
+  "why_chosen": "Header says text/plain 7bit, but the body holds a raw forwarded HTML email full of quoted-printable artifacts (=3D, =20). The dataset has zero non-ASCII bytes, so real decoding is covered by string unit tests.",
+  "status": "ok",
+  "fields": {
+    "message_id": "<6228804.1075841958676.JavaMail.evans@thyme>",
+    "date": "2002-01-08T12:45:19Z",
+    "from_address": "quelnunes@hotmail.com",
+    "to_addresses": [
+      "d..thomas@enron.com"
+    ],
+    "subject": "Fwd: OnePass Member continental.com Specials for Raquel Thomas",
+    "source_file": "maildir/thomas-p/deleted_items/300.",
+    "cc_addresses": null,
+    "bcc_addresses": null,
+    "x_from": "\"RAQUEL NUNES\" <quelnunes@hotmail.com>@ENRON",
+    "x_to": "Thomas, Paul D. </O=ENRON/OU=NA/CN=RECIPIENTS/CN=PTHOMAS2>",
+    "x_cc": null,
+    "x_bcc": null,
+    "x_folder": "\\ExMerge - Thomas, Paul D.\\Deleted Items",
+    "x_origin": "THOMAS-P",
+    "content_type": "text/plain; charset=us-ascii",
+    "has_attachment": false,
+    "attachments": []
+  },
+  "body": {
+    "starts_with": "Raquel Nunes Thomas\n\n\n________________________________________________",
+    "ends_with": "net/servlet/eof?JHDUATEjNLsgNgLlFav0f7beD9vfEaEv=22>\n\n\n</BODY>\n</HTML>",
+    "length": 33343
+  },
+  "forwarded_content": null,
+  "quoted_content": {
+    "starts_with": ">From: \"Continental Airlines, Inc.\"\n><Continental_Airlines_Inc@coair.r",
+    "ends_with": "><td><font face=3D=22arial, helvetica, san-serif=22 size=3D=222=22><p>",
+    "length": 383
+  },
+  "review_flags": [
+    "DECIDED: body stored exactly as written; QP cleaned only in the normalized similarity/NER text.",
+    "Subject is 'Fwd:' but there is no Outlook/Lotus marker, so the '>' lines stay in quoted_content."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

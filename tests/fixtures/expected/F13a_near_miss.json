@@ -1,0 +1,35 @@
+{
+  "fixture_id": "F13a_near_miss",
+  "category": "Dedup: ~85% near miss (should NOT flag)",
+  "why_chosen": "Same sender and subject 3 days apart, but the When:/Where: lines and recipients differ.",
+  "members": [
+    {
+      "source_file": "maildir/buy-r/inbox/5.",
+      "message_id": "<6808999.1075840379468.JavaMail.evans@thyme>",
+      "date": "2001-12-14T20:08:27Z",
+      "from_address": "jim.fallon@enron.com",
+      "subject": "Updated: Post Petition Commercial Lead Meeting",
+      "status": "ok",
+      "primary_body_len": 260,
+      "dedup_text_source": "primary"
+    },
+    {
+      "source_file": "maildir/buy-r/inbox/3.",
+      "message_id": "<31971505.1075840379417.JavaMail.evans@thyme>",
+      "date": "2001-12-17T19:35:46Z",
+      "from_address": "jim.fallon@enron.com",
+      "subject": "Updated: Post Petition Commercial Lead Meeting",
+      "status": "ok",
+      "primary_body_len": 207,
+      "dedup_text_source": "primary"
+    }
+  ],
+  "expected": {
+    "measured_similarity": 83.9,
+    "is_duplicate_pair": false
+  },
+  "review_flags": [
+    "True ratio 83.9 (the earlier 100 came from the CRLF bug)."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

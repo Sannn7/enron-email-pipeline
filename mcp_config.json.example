@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "gmail": {
+      "command": "python",
+      "args": ["mcp_server/gmail_smtp_server.py"],
+      "env": {
+        "SMTP_HOST": "smtp.gmail.com",
+        "SMTP_PORT": "587",
+        "SMTP_USER": "<your_gmail_address>",
+        "SMTP_PASS": "<your_16_char_gmail_app_password>",
+        "SMTP_FROM": "<your_gmail_address>"
+      }
+    }
+  }
+}

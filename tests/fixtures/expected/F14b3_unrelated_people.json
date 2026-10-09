@@ -1,0 +1,37 @@
+{
+  "fixture_id": "F14b3_unrelated_people",
+  "category": "Thread: generic subject, genuinely different people",
+  "why_chosen": "'Information' 12.2 hours apart: Kimberly Hillis -> Christopher Calger, and John Lavorato -> Tim Belden. No person in common, even allowing for aliases. The bodies are a near-identical template from different senders, so this also must not be a dedup match.",
+  "members": [
+    {
+      "source_file": "maildir/lavorato-j/discussion_threads/352.",
+      "message_id": "<4839242.1075857729968.JavaMail.evans@thyme>",
+      "date": "2000-11-09T16:53:00Z",
+      "from_address": "kimberly.hillis@enron.com",
+      "subject": "Information",
+      "status": "ok",
+      "primary_body_len": 813,
+      "dedup_text_source": "primary"
+    },
+    {
+      "source_file": "maildir/lavorato-j/sent_items/130.",
+      "message_id": "<3372141.1075857685331.JavaMail.evans@thyme>",
+      "date": "2000-11-10T05:05:00Z",
+      "from_address": "john.lavorato@enron.com",
+      "subject": "Information",
+      "status": "ok",
+      "primary_body_len": 719,
+      "dedup_text_source": "primary"
+    }
+  ],
+  "expected": {
+    "same_thread": false,
+    "reason": "no shared participant (verified distinct people)",
+    "is_duplicate_pair": false,
+    "dedup_reason": "different from_address"
+  },
+  "review_flags": [
+    "Found by the alias-aware search (171 same-mailbox candidates); checked by hand."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

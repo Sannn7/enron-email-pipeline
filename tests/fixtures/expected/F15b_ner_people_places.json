@@ -1,0 +1,70 @@
+{
+  "fixture_id": "F15b_ner_people_places",
+  "category": "NER-rich body (people, places, orgs)",
+  "why_chosen": "Steel-customer setup request: person names, Chicago/Illinois, and a list of company names.",
+  "status": "ok",
+  "fields": {
+    "message_id": "<29850649.1075858958733.JavaMail.evans@thyme>",
+    "date": "2001-10-15T15:53:03Z",
+    "from_address": "tom.moran@enron.com",
+    "to_addresses": [
+      "tana.jones@enron.com",
+      "stephanie.sever@enron.com",
+      "samuel.schott@enron.com"
+    ],
+    "subject": "EIM-Steel Customers",
+    "source_file": "maildir/jones-t/inbox/402.",
+    "cc_addresses": [
+      "lisa.lees@enron.com",
+      "wendi.lebrocq@enron.com",
+      "rebecca.phillips@enron.com",
+      "ken.curry@enron.com"
+    ],
+    "bcc_addresses": [
+      "lisa.lees@enron.com",
+      "wendi.lebrocq@enron.com",
+      "rebecca.phillips@enron.com",
+      "ken.curry@enron.com"
+    ],
+    "x_from": "Moran, Tom </O=ENRON/OU=NA/CN=RECIPIENTS/CN=TMORAN>",
+    "x_to": "Jones, Tana </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Tjones>, Sever, Stephanie </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Ssever>, Schott, Samuel </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Sschott>",
+    "x_cc": "Lees, Lisa </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Llees>, Lebrocq, Wendi </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Wlebrocq>, Phillips, Rebecca </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Rphilli>, Curry, Ken </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Kcurry>",
+    "x_bcc": null,
+    "x_folder": "\\TJONES (Non-Privileged)\\Jones, Tana\\Inbox",
+    "x_origin": "Jones-T",
+    "content_type": "text/plain; charset=us-ascii",
+    "has_attachment": true,
+    "attachments": [
+      "Customer List for Carol North 092701.xls"
+    ]
+  },
+  "body": {
+    "starts_with": "In addition to the customers in yellow who are already part of the Chi",
+    "ends_with": "Incorporated\t\n138830\tOscar Winski Co., Inc.\t\n138811\tZeeco Metals, Inc.",
+    "length": 2616
+  },
+  "forwarded_content": null,
+  "quoted_content": {
+    "starts_with": "-----Original Message-----\nFrom: \tSever, Stephanie  \nSent:\tThursday, O",
+    "ends_with": "> \n\n\n\nBernice C. Rodriguez \nENW GCP - Houston Operations \n713-853-7972",
+    "length": 1634
+  },
+  "ner_expect_at_least": {
+    "PERSON": [
+      "Rebecca Phillips",
+      "Bernice C. Rodriguez"
+    ],
+    "GPE": [
+      "Chicago",
+      "Illinois"
+    ],
+    "ORG": [
+      "Monarch Steel Company Inc",
+      "Action Steel Supply, Inc."
+    ]
+  },
+  "review_flags": [
+    "NER is DROPPED for the deadline (future work). GPE added to the labels (decided)."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

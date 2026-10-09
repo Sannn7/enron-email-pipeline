@@ -1,0 +1,40 @@
+{
+  "fixture_id": "F13r_synthetic_resend",
+  "category": "Dedup: re-send pair (SYNTHETIC)",
+  "why_chosen": "Copy of F00 with the Date moved +3 days. The Message-ID also had to change (a '.SYNTHETIC-RESEND' suffix), otherwise the UNIQUE message_id constraint would drop it at insert and it would never reach dedup.",
+  "members": [
+    {
+      "source_file": "maildir/staab-t/sent_items/128.",
+      "message_id": "<9589690.1075862393402.JavaMail.evans@thyme>",
+      "date": "2001-11-14T19:18:48Z",
+      "from_address": "theresa.staab@enron.com",
+      "subject": "CIG invoices",
+      "status": "ok",
+      "primary_body_len": 492,
+      "dedup_text_source": "primary"
+    },
+    {
+      "source_file": "maildir/staab-t/sent_items/9128.",
+      "message_id": "<9589690.1075862393402.SYNTHETIC-RESEND@thyme>",
+      "date": "2001-11-17T19:18:48Z",
+      "from_address": "theresa.staab@enron.com",
+      "subject": "CIG invoices",
+      "status": "ok",
+      "primary_body_len": 492,
+      "dedup_text_source": "primary"
+    }
+  ],
+  "expected": {
+    "measured_similarity": 100.0,
+    "is_duplicate_pair": true,
+    "is_copy": false,
+    "original": "maildir/staab-t/sent_items/128.",
+    "flagged": "maildir/staab-t/sent_items/9128.",
+    "duplicate_of": "<9589690.1075862393402.JavaMail.evans@thyme>"
+  },
+  "review_flags": [
+    "File lives in tests/fixtures/synthetic/maildir/ (not real/).",
+    "Only the Date and Message-ID lines differ from the real file (verified with diff)."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

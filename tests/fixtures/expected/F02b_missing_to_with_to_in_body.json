@@ -1,0 +1,19 @@
+{
+  "fixture_id": "F02b_missing_to_with_to_in_body",
+  "category": "Missing To (failure) + header/body boundary",
+  "why_chosen": "No To header: the 'To: Paul Smith/ENRON_DEVELOPMENT@...' line and the second 'Subject: Synergen' are inside the forwarded block in the BODY (headers end in CRLF, body in LF). Proves body lines are never read as headers.",
+  "status": "failed",
+  "failure_reason": "missing_to",
+  "fields_present_in_raw": {
+    "source_file": "maildir/jones-t/notes_inbox/19.",
+    "message_id": "<4791304.1075847065099.JavaMail.evans@thyme>",
+    "date": "2000-04-01T05:31:00Z",
+    "from_address": "paul.smith@enron.com",
+    "subject": "Synergen",
+    "x_to": "Tana Jones@ECT"
+  },
+  "review_flags": [
+    "Lotus names in To and a repeated Subject header are covered by string unit tests instead."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

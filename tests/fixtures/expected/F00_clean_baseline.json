@@ -1,0 +1,34 @@
+{
+  "fixture_id": "F00_clean_baseline",
+  "category": "Clean baseline",
+  "why_chosen": "One recipient, no CC, no forward/quote markers, no attachments, plain prose. Proves the happy path.",
+  "status": "ok",
+  "fields": {
+    "message_id": "<9589690.1075862393402.JavaMail.evans@thyme>",
+    "date": "2001-11-14T19:18:48Z",
+    "from_address": "theresa.staab@enron.com",
+    "to_addresses": [
+      "g..barkowsky@enron.com"
+    ],
+    "subject": "CIG invoices",
+    "source_file": "maildir/staab-t/sent_items/128.",
+    "cc_addresses": null,
+    "bcc_addresses": null,
+    "x_from": "Staab, Theresa </O=ENRON/OU=NA/CN=RECIPIENTS/CN=TSTAAB>",
+    "x_to": "Barkowsky, Gloria G. </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Gbarkow>",
+    "x_cc": null,
+    "x_bcc": null,
+    "x_folder": "\\TSTAAB (Non-Privileged)\\Staab, Theresa\\Sent Items",
+    "x_origin": "Staab-T",
+    "content_type": "text/plain; charset=us-ascii",
+    "has_attachment": false,
+    "attachments": []
+  },
+  "body": "Gloria,\nIs there any way you could copy and send overnight to me the CIG invoices for the 33175000 contract from May, 2000 through January, 2001?\n\nI am helping Darla and Megan reconcile the Citizens account.  It is changing over to Kinder Morgan effective Dec. 1 and we need to reconcile this account rather quickly.\n\nI printed all other invoices on the Internet from CIG's website but they only go back 9 months.\n\nLet me know if this is possible or where else I might find these.\n\nThanks,\nTheresa",
+  "forwarded_content": null,
+  "quoted_content": null,
+  "review_flags": [
+    "Also the ORIGINAL of the synthetic re-send pair F13r."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

@@ -1,0 +1,33 @@
+{
+  "fixture_id": "F14b1_window",
+  "category": "Thread: generic subject outside the 14-day window",
+  "why_chosen": "'Lunch' / 'Re: Lunch' from the same sender 47.7 days apart.",
+  "members": [
+    {
+      "source_file": "maildir/perlingiere-d/sent/7.",
+      "message_id": "<1845824.1075842310456.JavaMail.evans@thyme>",
+      "date": "2000-04-04T17:53:00Z",
+      "from_address": "debra.perlingiere@enron.com",
+      "subject": "Lunch",
+      "status": "ok",
+      "primary_body_len": 57,
+      "dedup_text_source": "primary"
+    },
+    {
+      "source_file": "maildir/perlingiere-d/sent/172.",
+      "message_id": "<28894256.1075842314161.JavaMail.evans@thyme>",
+      "date": "2000-05-22T11:02:00Z",
+      "from_address": "debra.perlingiere@enron.com",
+      "subject": "Re: Lunch",
+      "status": "ok",
+      "primary_body_len": 3,
+      "dedup_text_source": "excluded"
+    }
+  ],
+  "expected": {
+    "same_thread": false,
+    "reason": "gap 47.7 days > 14"
+  },
+  "review_flags": [],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

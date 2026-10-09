@@ -1,0 +1,53 @@
+{
+  "fixture_id": "F10n_attachments_negative",
+  "category": "<<attachment>> references (negative case)",
+  "why_chosen": "Contains '<< File: mailto:x@hotmail.com >>' lines that must NOT count as attachments, alongside real '<< File: storm11_0126.JPG >>' references that must.",
+  "status": "ok",
+  "fields": {
+    "message_id": "<11517380.1075855382921.JavaMail.evans@thyme>",
+    "date": "2001-11-30T14:03:40Z",
+    "from_address": "m..love@enron.com",
+    "to_addresses": [
+      "jmjaked@mindspring.com"
+    ],
+    "subject": "RE: Fw: Haleyville Tornado 11-24-01 Part 2",
+    "source_file": "maildir/love-p/sent_items/434.",
+    "cc_addresses": null,
+    "bcc_addresses": null,
+    "x_from": "Love, Phillip M. </O=ENRON/OU=NA/CN=RECIPIENTS/CN=PLOVE>",
+    "x_to": "'\"Jason Dobbs\" <jmjaked@mindspring.com>@ENRON'",
+    "x_cc": null,
+    "x_bcc": null,
+    "x_folder": "\\Phillip_Love_Jan2002_1\\Love, Phillip M.\\Sent Items",
+    "x_origin": "Love-P",
+    "content_type": "text/plain; charset=us-ascii",
+    "has_attachment": true,
+    "attachments": [
+      "storm11_0138.JPG",
+      "storm11_0122.JPG",
+      "storm11_0123.JPG",
+      "storm11_0124.JPG",
+      "storm11_0126.JPG",
+      "storm11_0128.JPG",
+      "storm11_0129.JPG",
+      "storm11_0132.JPG",
+      "storm11_0135.JPG",
+      "storm11_0120.JPG"
+    ]
+  },
+  "body": {
+    "starts_with": "unbelievable pictures.\nPL",
+    "ends_with": "unbelievable pictures.\nPL",
+    "length": 25
+  },
+  "forwarded_content": null,
+  "quoted_content": {
+    "starts_with": "-----Original Message-----\nFrom: \t\"Jason Dobbs\" <jmjaked@mindspring.co",
+    "ends_with": "storm11_0135.JPG >> \n - storm11_0120.JPG << File: storm11_0120.JPG >>",
+    "length": 4307
+  },
+  "review_flags": [
+    "Expected attachments = only the .JPG files; every mailto:/email-address '<< >>' is excluded."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

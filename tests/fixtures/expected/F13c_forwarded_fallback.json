@@ -1,0 +1,38 @@
+{
+  "fixture_id": "F13c_forwarded_fallback",
+  "category": "Dedup: short primary body -> compare forwarded_content",
+  "why_chosen": "The same weekly report forwarded two weeks apart. Each email starts with the Lotus marker, so the primary body is empty and dedup falls back to forwarded_content (decided rule).",
+  "members": [
+    {
+      "source_file": "maildir/neal-s/discussion_threads/81.",
+      "message_id": "<28611924.1075858401275.JavaMail.evans@thyme>",
+      "date": "2000-08-16T15:48:00Z",
+      "from_address": "scott.neal@enron.com",
+      "subject": "API and API Crude, Distillate & Unleaded Stocks Graphs",
+      "status": "ok",
+      "primary_body_len": 0,
+      "dedup_text_source": "forwarded"
+    },
+    {
+      "source_file": "maildir/neal-s/discussion_threads/100.",
+      "message_id": "<3748824.1075858401699.JavaMail.evans@thyme>",
+      "date": "2000-08-30T10:45:00Z",
+      "from_address": "scott.neal@enron.com",
+      "subject": "API and API Crude, Distillate & Unleaded Stocks Graphs",
+      "status": "ok",
+      "primary_body_len": 0,
+      "dedup_text_source": "forwarded"
+    }
+  ],
+  "expected": {
+    "compared_text": "forwarded_content (normalized)",
+    "measured_similarity": 97.6,
+    "is_duplicate_pair": true,
+    "original": "maildir/neal-s/discussion_threads/81.",
+    "flagged": "maildir/neal-s/discussion_threads/100."
+  },
+  "review_flags": [
+    "Forwarded-content ratio is 97.6: ABOVE 90, so this pair IS flagged under the fallback rule, even though it is the same recurring report with different numbers. Worth a README note."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

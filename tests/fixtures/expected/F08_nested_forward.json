@@ -1,0 +1,43 @@
+{
+  "fixture_id": "F08_nested_forward",
+  "category": "Nested forward",
+  "why_chosen": "3 levels: Outlook 'Original Message' wrapping two Lotus forwards (short-dash '----- Forwarded by' variant). Subject is 'FW:', so the Outlook block counts as forwarded.",
+  "status": "ok",
+  "fields": {
+    "message_id": "<27631691.1075858861190.JavaMail.evans@thyme>",
+    "date": "2001-10-24T17:43:38Z",
+    "from_address": "tracy.geaccone@enron.com",
+    "to_addresses": [
+      "steven.harris@enron.com"
+    ],
+    "subject": "FW: Enron Article in Oct. 23 WSJ",
+    "source_file": "maildir/harris-s/deleted_items/196.",
+    "cc_addresses": null,
+    "bcc_addresses": null,
+    "x_from": "Geaccone, Tracy </O=ENRON/OU=NA/CN=RECIPIENTS/CN=TGEACCO>",
+    "x_to": "Harris, Steven </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Sharris1>",
+    "x_cc": null,
+    "x_bcc": null,
+    "x_folder": "\\SHARRIS1 (Non-Privileged)\\Harris, Steven\\Deleted Items",
+    "x_origin": "Harris-S",
+    "content_type": "text/plain; charset=us-ascii",
+    "has_attachment": false,
+    "attachments": []
+  },
+  "body": {
+    "starts_with": "FYI",
+    "ends_with": "FYI",
+    "length": 3
+  },
+  "forwarded_content": {
+    "starts_with": "-----Original Message-----\nFrom: \tTrevelise, Jon  \nSent:\tTuesday, Octo",
+    "ends_with": "004, fax 713-402-2645, steve.roberts@eott.com\n\n\n\n<Embedded StdOleLink>",
+    "length": 1034
+  },
+  "quoted_content": null,
+  "review_flags": [
+    "Under the decided rule everything from the first marker is forwarded_content; quoted_content is null.",
+    "Ends with '<Embedded StdOleLink>' (an embedded object). Not matched as an attachment."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

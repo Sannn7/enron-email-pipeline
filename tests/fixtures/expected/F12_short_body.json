@@ -1,0 +1,35 @@
+{
+  "fixture_id": "F12_short_body",
+  "category": "Empty or very short body",
+  "why_chosen": "Body is just 'yes' (3 chars) with no forwarded content: parses OK, but is excluded from dedup.",
+  "status": "ok",
+  "fields": {
+    "message_id": "<28894256.1075842314161.JavaMail.evans@thyme>",
+    "date": "2000-05-22T11:02:00Z",
+    "from_address": "debra.perlingiere@enron.com",
+    "to_addresses": [
+      "nony.flores@enron.com"
+    ],
+    "subject": "Re: Lunch",
+    "source_file": "maildir/perlingiere-d/sent/172.",
+    "cc_addresses": null,
+    "bcc_addresses": null,
+    "x_from": "Debra Perlingiere",
+    "x_to": "Nony Flores",
+    "x_cc": null,
+    "x_bcc": null,
+    "x_folder": "\\Debra_Perlingiere_Dec2000_June2001_1\\Notes Folders\\Sent",
+    "x_origin": "PERLINGIERE-D",
+    "content_type": "text/plain; charset=us-ascii",
+    "has_attachment": false,
+    "attachments": []
+  },
+  "body": "yes",
+  "forwarded_content": null,
+  "quoted_content": null,
+  "dedup_text_source": "excluded",
+  "review_flags": [
+    "Replaces merriss-s/notes_inbox/143. (not actually empty). Also used in F14b1."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

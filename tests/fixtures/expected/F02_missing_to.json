@@ -1,0 +1,19 @@
+{
+  "fixture_id": "F02_missing_to",
+  "category": "Missing To (failure)",
+  "why_chosen": "No To header at all, but X-To is present ('Enron Wholesale Services@ENRON'); the parser must NOT fall back to X-To.",
+  "status": "failed",
+  "failure_reason": "missing_to",
+  "fields_present_in_raw": {
+    "source_file": "maildir/king-j/personal/5.",
+    "message_id": "<7758998.1075852621110.JavaMail.evans@thyme>",
+    "date": "2001-05-24T01:00:08Z",
+    "from_address": "40enron@enron.com",
+    "subject": "Employee Referral Program",
+    "x_to": "Enron Wholesale Services@ENRON"
+  },
+  "review_flags": [
+    "From is '40enron@enron.com' (a mangled IMCEANOTES sender). Recorded only."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

@@ -1,0 +1,52 @@
+{
+  "fixture_id": "F13b_folder_copies",
+  "category": "Dedup: folder copy group (3 copies)",
+  "why_chosen": "One email stored in all_documents, discussion_threads and notes_inbox with three different Message-IDs.",
+  "members": [
+    {
+      "source_file": "maildir/symes-k/all_documents/3747.",
+      "message_id": "<3592266.1075841707944.JavaMail.evans@thyme>",
+      "date": "2001-05-01T13:57:00Z",
+      "from_address": "sharen.cason@enron.com",
+      "subject": "Unit name",
+      "status": "ok",
+      "primary_body_len": 128,
+      "dedup_text_source": "primary"
+    },
+    {
+      "source_file": "maildir/symes-k/discussion_threads/3598.",
+      "message_id": "<2241240.1075841859996.JavaMail.evans@thyme>",
+      "date": "2001-05-01T13:57:00Z",
+      "from_address": "sharen.cason@enron.com",
+      "subject": "Unit name",
+      "status": "ok",
+      "primary_body_len": 128,
+      "dedup_text_source": "primary"
+    },
+    {
+      "source_file": "maildir/symes-k/notes_inbox/19.",
+      "message_id": "<17866717.1075841866424.JavaMail.evans@thyme>",
+      "date": "2001-05-01T13:57:00Z",
+      "from_address": "sharen.cason@enron.com",
+      "subject": "Unit name",
+      "status": "ok",
+      "primary_body_len": 128,
+      "dedup_text_source": "primary"
+    }
+  ],
+  "expected": {
+    "copy_group": true,
+    "canonical": "maildir/symes-k/all_documents/3747.",
+    "copies": [
+      "maildir/symes-k/discussion_threads/3598.",
+      "maildir/symes-k/notes_inbox/19."
+    ],
+    "copy_of": "<3592266.1075841707944.JavaMail.evans@thyme>",
+    "is_duplicate_any": false,
+    "literal_mode": "all three in one dedup group: original = all_documents/3747. (tie broken by source_file), other two flagged, similarity 100"
+  },
+  "review_flags": [
+    "Canonical = lexicographically smallest source_file (plan 4.1)."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

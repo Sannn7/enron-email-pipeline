@@ -1,0 +1,36 @@
+{
+  "fixture_id": "F14b2_alias_limitation",
+  "category": "Thread: ALIAS LIMITATION case",
+  "why_chosen": "Generic subject 'lunch' 6.2 days apart. Both emails go to Benjamin Rogers, but under two addresses (benjamin.rogers@enron.com vs brogers2@enron.com). Exact-address matching sees no shared participant.",
+  "members": [
+    {
+      "source_file": "maildir/rogers-b/all_documents/2116.",
+      "message_id": "<32561491.1075863707826.JavaMail.evans@thyme>",
+      "date": "2000-10-18T09:59:00Z",
+      "from_address": "sfertitta@haysmcconn.com",
+      "subject": "lunch",
+      "status": "ok",
+      "primary_body_len": 60,
+      "dedup_text_source": "primary"
+    },
+    {
+      "source_file": "maildir/rogers-b/personal/301.",
+      "message_id": "<16444609.1075863709184.JavaMail.evans@thyme>",
+      "date": "2000-10-24T15:16:00Z",
+      "from_address": "alli_parent@enron.net",
+      "subject": "lunch",
+      "status": "ok",
+      "primary_body_len": 143,
+      "dedup_text_source": "primary"
+    }
+  ],
+  "expected": {
+    "same_thread": false,
+    "reason": "no shared participant BY ADDRESS (same person, two aliases)",
+    "documents_limitation": true
+  },
+  "review_flags": [
+    "Labelled as the alias limitation, not as unrelated people."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

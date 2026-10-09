@@ -1,0 +1,58 @@
+{
+  "fixture_id": "F09_gt_quoted",
+  "category": "'>' quoted reply",
+  "why_chosen": "Pure '>'-prefixed quoted text with no Outlook/Lotus marker; 17 external To addresses.",
+  "status": "ok",
+  "fields": {
+    "message_id": "<7263528.1075851739635.JavaMail.evans@thyme>",
+    "date": "2001-03-05T15:14:00Z",
+    "from_address": "mark.woita@fhlbtopeka.com",
+    "to_addresses": [
+      "christopher.bruner@motorola.com",
+      "bruners@uswest.net",
+      "maurden@rconnect.com",
+      "dmcnemar@juno.com",
+      "lzzylou8@juno.com",
+      "gwlee@mymailstation.com",
+      "sjbruner@worldnet.att.net",
+      "misterpiccalo@hotmail.com",
+      "mwoita@home.com",
+      "wpatti0205@aol.com",
+      "mark.woita@fhlbtopeka.com",
+      "gjforman@juno.com",
+      "corey-ponder@ouhsc.edu",
+      "helenswig@aol.com",
+      "jjjsmd@aol.com",
+      "jim.schwieger@enron.com",
+      "smithki@ms.com"
+    ],
+    "subject": "FW: When you thought I wasn't looking...",
+    "source_file": "maildir/schwieger-j/personal/59.",
+    "cc_addresses": null,
+    "bcc_addresses": null,
+    "x_from": "Mark Woita <Mark.Woita@FHLBTopeka.com>",
+    "x_to": "\"Chris Bruner (E-mail)\" <christopher.bruner@motorola.com>, \"David & Kathleen Bruner (E-mail)\" <bruners@uswest.net>, \"Denny & Maureen Boro (E-mail)\" <MaurDen@RConnect.com>, \"Don McNemar (E-mail)\" <dmcnemar@juno.com>, \"Elizabeth Forman (E-mail)\"\t <lzzylou8@juno.com>, \"Gladyce Woita-Lee (E-mail)\"\t <gwlee@mymailstation.com>, \"Jim & Sandy Bruner (E-mail)\"\t <SJBruner@worldnet.att.net>, \"Kyle Forman (E-mail)\"\t <misterpiccalo@hotmail.com>, \"Linda Woita (E-mail)\" <mwoita@home.com>, \"Lyle & Patti Woita (E-mail)\" <wpatti0205@aol.com>, \"Mark Woita (E-mail)\"\t <mark.woita@fhlbtopeka.com>, \"Marlyss Forman (E-mail)\"\t <GJForman@Juno.com>, \"Cory & Michelle Ponder (E-mail)\"\t <corey-ponder@ouhsc.edu>, \"Helen Schwieger (E-mail)\" <helenswig@aol.com>, \"Jeff & Donna Smith (E-mail)\" <jjjsmd@aol.com>, \"Jim Schwieger (E-mail)\"\t <Jim.Schwieger@enron.com>, \"Kim Smith (E-mail)\" <smithki@ms.com>",
+    "x_cc": null,
+    "x_bcc": null,
+    "x_folder": "\\James_Schwieger_Nov2001\\Notes Folders\\Personal",
+    "x_origin": "SCHWIEGER-J",
+    "content_type": "text/plain; charset=us-ascii",
+    "has_attachment": false,
+    "attachments": []
+  },
+  "body": {
+    "starts_with": "Family,\nThought you might enjoy this.\n-Mark",
+    "ends_with": "Family,\nThought you might enjoy this.\n-Mark",
+    "length": 43
+  },
+  "forwarded_content": null,
+  "quoted_content": {
+    "starts_with": "> When you thought I wasn't looking (by a child)...\n>\n>\n>\n> When you t",
+    "ends_with": "\"Thanks for all the things I saw when you thought I wasn't looking.\"\n>",
+    "length": 1949
+  },
+  "review_flags": [
+    "Header values updated to the raw text (internal whitespace kept), per the store-as-written rule."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

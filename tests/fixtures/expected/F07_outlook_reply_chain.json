@@ -1,0 +1,42 @@
+{
+  "fixture_id": "F07_outlook_reply_chain",
+  "category": "Outlook 'Original Message' reply chain",
+  "why_chosen": "Long back-and-forth chain (~20 nested Outlook blocks), subject 'RE:'; primary body is one line.",
+  "status": "ok",
+  "fields": {
+    "message_id": "<27081964.1075861441942.JavaMail.evans@thyme>",
+    "date": "2001-11-19T16:33:14Z",
+    "from_address": "ted.evans@enron.com",
+    "to_addresses": [
+      "m..tholt@enron.com"
+    ],
+    "subject": "RE: How good is Temptation Island 2",
+    "source_file": "maildir/tholt-j/deleted_items/216.",
+    "cc_addresses": null,
+    "bcc_addresses": null,
+    "x_from": "Evans, Ted </O=ENRON/OU=NA/CN=RECIPIENTS/CN=TEVANS>",
+    "x_to": "Tholt, Jane M. </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Jtholt>",
+    "x_cc": null,
+    "x_bcc": null,
+    "x_folder": "\\JTHOLT (Non-Privileged)\\Tholt, Jane M.\\Deleted Items",
+    "x_origin": "Tholt-J",
+    "content_type": "text/plain; charset=us-ascii",
+    "has_attachment": false,
+    "attachments": []
+  },
+  "body": {
+    "starts_with": "trying to stay up to date on the current fashions??",
+    "ends_with": "trying to stay up to date on the current fashions??",
+    "length": 51
+  },
+  "forwarded_content": null,
+  "quoted_content": {
+    "starts_with": "-----Original Message-----\nFrom: \tTholt, Jane M.  \nSent:\tMonday, Novem",
+    "ends_with": "not sure I'm going to watch it.  None of the people really interest me",
+    "length": 8300
+  },
+  "review_flags": [
+    "DECIDED split rule: first marker wins. Outlook block -> quoted_content, unless the subject starts with FW:/Fwd:, then forwarded_content. Lotus 'Forwarded by' -> forwarded_content."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

@@ -1,0 +1,103 @@
+{
+  "fixture_id": "F14a_reply_chain",
+  "category": "Thread: reply chain",
+  "why_chosen": "8 emails over 6 days, 4 senders, subject variants 'Netco Curves' / 'RE:' / 'FW:' / lowercase 'netco curves'; kam.keiser is in every email. No In-Reply-To headers, so this is subject-based threading.",
+  "members": [
+    {
+      "source_file": "maildir/keiser-k/sent_items/270.",
+      "message_id": "<22532450.1075840197597.JavaMail.evans@thyme>",
+      "date": "2002-01-08T16:06:32Z",
+      "from_address": "kam.keiser@enron.com",
+      "subject": "Netco Curves",
+      "status": "ok",
+      "primary_body_len": 201,
+      "dedup_text_source": "primary"
+    },
+    {
+      "source_file": "maildir/keiser-k/deleted_items/244.",
+      "message_id": "<23405483.1075840173762.JavaMail.evans@thyme>",
+      "date": "2002-01-08T16:20:25Z",
+      "from_address": "m..love@enron.com",
+      "subject": "RE: Netco Curves",
+      "status": "ok",
+      "primary_body_len": 8,
+      "dedup_text_source": "excluded"
+    },
+    {
+      "source_file": "maildir/keiser-k/inbox/378.",
+      "message_id": "<6794617.1075840188902.JavaMail.evans@thyme>",
+      "date": "2002-01-08T16:22:15Z",
+      "from_address": "scott.palmer@enron.com",
+      "subject": "RE: Netco Curves",
+      "status": "ok",
+      "primary_body_len": 78,
+      "dedup_text_source": "primary"
+    },
+    {
+      "source_file": "maildir/keiser-k/sent_items/233.",
+      "message_id": "<12766380.1075840196750.JavaMail.evans@thyme>",
+      "date": "2002-01-10T16:21:34Z",
+      "from_address": "kam.keiser@enron.com",
+      "subject": "Netco curves",
+      "status": "ok",
+      "primary_body_len": 172,
+      "dedup_text_source": "primary"
+    },
+    {
+      "source_file": "maildir/keiser-k/inbox/312.",
+      "message_id": "<17163616.1075840187258.JavaMail.evans@thyme>",
+      "date": "2002-01-14T22:11:53Z",
+      "from_address": "s..lim@enron.com",
+      "subject": "RE: Netco curves",
+      "status": "ok",
+      "primary_body_len": 148,
+      "dedup_text_source": "primary"
+    },
+    {
+      "source_file": "maildir/keiser-k/inbox/311.",
+      "message_id": "<23143936.1075840187234.JavaMail.evans@thyme>",
+      "date": "2002-01-14T22:12:27Z",
+      "from_address": "s..lim@enron.com",
+      "subject": "FW: Netco curves",
+      "status": "ok",
+      "primary_body_len": 43,
+      "dedup_text_source": "primary"
+    },
+    {
+      "source_file": "maildir/keiser-k/sent_items/199.",
+      "message_id": "<27535396.1075840195976.JavaMail.evans@thyme>",
+      "date": "2002-01-14T22:18:15Z",
+      "from_address": "kam.keiser@enron.com",
+      "subject": "RE: Netco curves",
+      "status": "ok",
+      "primary_body_len": 249,
+      "dedup_text_source": "primary"
+    },
+    {
+      "source_file": "maildir/keiser-k/sent_items/196.",
+      "message_id": "<19403364.1075840195905.JavaMail.evans@thyme>",
+      "date": "2002-01-14T23:14:21Z",
+      "from_address": "kam.keiser@enron.com",
+      "subject": "netco curves",
+      "status": "ok",
+      "primary_body_len": 96,
+      "dedup_text_source": "primary"
+    }
+  ],
+  "expected": {
+    "same_thread": [
+      "maildir/keiser-k/sent_items/270.",
+      "maildir/keiser-k/deleted_items/244.",
+      "maildir/keiser-k/inbox/378.",
+      "maildir/keiser-k/sent_items/233.",
+      "maildir/keiser-k/inbox/312.",
+      "maildir/keiser-k/inbox/311.",
+      "maildir/keiser-k/sent_items/199.",
+      "maildir/keiser-k/sent_items/196."
+    ]
+  },
+  "review_flags": [
+    "sent_items/196. (to brian.gillis) joins because it shares kam.keiser and is within 14 days."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

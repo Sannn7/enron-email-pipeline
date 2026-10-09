@@ -1,0 +1,39 @@
+{
+  "fixture_id": "F13x_timezone_edge_case",
+  "category": "Dedup: timezone edge case (flagged by the spec)",
+  "why_chosen": "Same email from two exports with timestamps exactly 10 h apart: not a copy (timestamps differ), so the spec flags it as a duplicate. Likely an export timezone artifact, not a human re-send.",
+  "members": [
+    {
+      "source_file": "maildir/ybarbo-p/hoegh_galleon/16.",
+      "message_id": "<33433347.1075851946484.JavaMail.evans@thyme>",
+      "date": "2001-05-02T09:44:00Z",
+      "from_address": "dan.masters@enron.com",
+      "subject": "Scan of photo",
+      "status": "ok",
+      "primary_body_len": 75,
+      "dedup_text_source": "primary"
+    },
+    {
+      "source_file": "maildir/ybarbo-p/hoegh_galleon/1.",
+      "message_id": "<9484453.1075845385856.JavaMail.evans@thyme>",
+      "date": "2001-05-02T19:44:00Z",
+      "from_address": "dan.masters@enron.com",
+      "subject": "Scan of photo",
+      "status": "ok",
+      "primary_body_len": 75,
+      "dedup_text_source": "primary"
+    }
+  ],
+  "expected": {
+    "measured_similarity": 100.0,
+    "is_duplicate_pair": true,
+    "is_copy": false,
+    "original": "maildir/ybarbo-p/hoegh_galleon/16.",
+    "flagged": "maildir/ybarbo-p/hoegh_galleon/1."
+  },
+  "review_flags": [
+    "README caveat: a likely export artifact.",
+    "Timezone-shifted copy stage does NOT apply: both files are in the same directory (maildir/ybarbo-p/hoegh_galleon/), and 'different folders' is required. Expectation unchanged: still flagged as a duplicate. (Their X-Folder headers differ: two exports.)"
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

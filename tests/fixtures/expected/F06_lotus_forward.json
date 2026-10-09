@@ -1,0 +1,40 @@
+{
+  "fixture_id": "F06_lotus_forward",
+  "category": "Lotus 'Forwarded by' forward",
+  "why_chosen": "Classic Lotus forward with embedded From/To/cc/Subject lines, and the separator wraps onto a second line.",
+  "status": "ok",
+  "fields": {
+    "message_id": "<21885071.1075857411765.JavaMail.evans@thyme>",
+    "date": "2001-05-04T10:20:00Z",
+    "from_address": "jeffrey.gossett@enron.com",
+    "to_addresses": [
+      "errol.mclaughlin@enron.com"
+    ],
+    "subject": "Alroy",
+    "source_file": "maildir/mclaughlin-e/notes_inbox/44.",
+    "cc_addresses": null,
+    "bcc_addresses": null,
+    "x_from": "Jeffrey C Gossett",
+    "x_to": "Errol McLaughlin",
+    "x_cc": null,
+    "x_bcc": null,
+    "x_folder": "\\Errol_McLaughlin_Jun2001\\Notes Folders\\Notes inbox",
+    "x_origin": "McLaughlin-E",
+    "content_type": "text/plain; charset=us-ascii",
+    "has_attachment": false,
+    "attachments": []
+  },
+  "body": {
+    "starts_with": "Errol -\n\nHere is Alroy's number.  I would call him as soon as possible",
+    "ends_with": "e.  Let me know \nwhat the verdict is and when you talk to him.\n\nThanks",
+    "length": 139
+  },
+  "forwarded_content": {
+    "starts_with": "---------------------- Forwarded by Jeffrey C Gossett/HOU/ECT on 05/04",
+    "ends_with": "in \nHouston, so any help you can give we would both appreciate!\n\nDave",
+    "length": 461
+  },
+  "quoted_content": null,
+  "review_flags": [],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}

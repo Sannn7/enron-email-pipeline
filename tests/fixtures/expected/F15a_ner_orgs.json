@@ -1,0 +1,50 @@
+{
+  "fixture_id": "F15a_ner_orgs",
+  "category": "NER-rich body (organizations)",
+  "why_chosen": "75+ counterparty company names, one per line.",
+  "status": "ok",
+  "fields": {
+    "message_id": "<14056189.1075840825996.JavaMail.evans@thyme>",
+    "date": "2001-09-05T23:23:14Z",
+    "from_address": "jay.webb@enron.com",
+    "to_addresses": [
+      "john.lavorato@enron.com",
+      "louise.kitchen@enron.com",
+      "greg.piper@enron.com",
+      "john.arnold@enron.com"
+    ],
+    "subject": "limit order usage today",
+    "source_file": "maildir/kitchen-l/_americas/eol/152.",
+    "cc_addresses": null,
+    "bcc_addresses": null,
+    "x_from": "Webb, Jay </O=ENRON/OU=NA/CN=RECIPIENTS/CN=JWEBB>",
+    "x_to": "Lavorato, John </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Jlavora>, Kitchen, Louise </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Lkitchen>, Piper, Greg </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Gpiper>, Arnold, John </O=ENRON/OU=NA/CN=RECIPIENTS/CN=Jarnold>",
+    "x_cc": null,
+    "x_bcc": null,
+    "x_folder": "\\ExMerge - Kitchen, Louise\\'Americas\\EOL",
+    "x_origin": "KITCHEN-L",
+    "content_type": "text/plain; charset=us-ascii",
+    "has_attachment": false,
+    "attachments": []
+  },
+  "body": {
+    "starts_with": "External orders submitted: 812\nExternal orders filled: 215\n\nAs a compa",
+    "ends_with": "iams Energy Marketing & Trading Company\nXcel Energy Inc.\ne prime, inc.",
+    "length": 2479
+  },
+  "forwarded_content": null,
+  "quoted_content": null,
+  "ner_expect_at_least": {
+    "ORG": [
+      "AEP Energy Services, Inc.",
+      "BNP Paribas",
+      "Calpine Energy Services, L.P.",
+      "Cinergy Services, Inc.",
+      "Xcel Energy Inc."
+    ]
+  },
+  "review_flags": [
+    "NER is DROPPED for the deadline (future work). Fixture kept; 'at least these' semantics."
+  ],
+  "verification": "AI drafted, reviewed by flags, not manually verified line by line"
+}
