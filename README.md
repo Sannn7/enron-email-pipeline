@@ -28,7 +28,8 @@ Built with Claude Code; see [AI_USAGE.md](AI_USAGE.md) for how.
 | `.eml` drafts written | 436 (`output/replies/`) |
 | Live notifications sent (redirected to a test inbox) | 2 (one per MCP route, `output/send_log.csv`) |
 
-A full run takes about 11 seconds (ingest 8 s, dedup 2.6 s, notify 0.3 s). There are 231 tests (`pytest`).
+A full run takes about 11 seconds (ingest 8 s, dedup 2.6 s, notify 0.3 s); with the NER bonus (`--ner`)
+it takes about 6 minutes more. There are 243 tests (`pytest`).
 
 ---
 
@@ -39,7 +40,8 @@ Requirements: Python 3.10+ (developed on 3.13) and about 2.5 GB of disk for the 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt          # rapidfuzz, mcp (<2), pytest
+pip install -r requirements.txt          # rapidfuzz, mcp (<2), pytest, spacy
+python -m spacy download en_core_web_sm  # only needed for the NER bonus (--ner)
 ```
 
 Download the dataset (423 MB) and extract it into `data/` (gitignored):
@@ -55,10 +57,11 @@ tar -xzf data/enron_mail_20150507.tar.gz -C data      # creates data/maildir/
 python main.py                                    # full pipeline, dry-run (default)
 python main.py --send-live --redirect-to you@gmail.com --max-send 1   # live: summary, then y/N
 python main.py --sync-send-log                    # record sends made from Claude Code (route b)
+python main.py --ner                              # + named-entity extraction bonus (~6 min)
 python main.py --dedup-mode literal               # no copy collapse: spec applied literally
 python main.py --no-tz-collapse                   # keep folder-copy collapse, skip timezone stage
 python main.py --mailboxes all --maildir tests/fixtures/real/maildir --db /tmp/fx.db   # any maildir
-pytest                                            # 231 tests
+pytest                                            # 243 tests
 ```
 
 Other flags (see `python main.py --help`):
@@ -111,6 +114,7 @@ data/maildir/<mailbox>/<folder>/<file>
   S6  copies        pipeline/copies.py           folder copies, then timezone-shifted copies -> is_copy = 1
   S7  dedup         pipeline/dedup.py            block -> fuzzy match vs anchor -> is_duplicate, duplicate_of, score
   S8  report        pipeline/report.py           duplicates_report.csv (generated from the DB flags)
+  S10 entities      pipeline/entities.py         --ner only: spaCy PERSON/ORG/DATE/GPE -> entities table
   S11 notify        pipeline/notify/*            .eml drafts; live: summary -> y/N -> MCP send_email -> send_log.csv
   S12 summary       main.py                      console + output/run_summary.json
 ```
@@ -126,7 +130,7 @@ main.py, config.py              entry point, flags and defaults
 pipeline/                       discovery, parsing/, extract, db, stats, copies, dedup, report, ingest, notify/
 mcp_server/                     gmail_smtp_server.py (MCP), smtp_send.py (SMTP, testable without MCP)
 scripts/                        mailbox_counts.py, mailbox_profile.py (mailbox selection evidence)
-tests/                          231 tests; fixtures/real (38 real emails), fixtures/synthetic, fixtures/expected
+tests/                          243 tests; fixtures/real (38 real emails), fixtures/synthetic, fixtures/expected
 schema.sql, sample_queries.sql, mcp_config.json.example, requirements.txt
 docs/                           live-send screenshots
 ```
@@ -171,10 +175,12 @@ the same shared `pipeline.copies.copy_key()` function.
 - **`emails`:** every spec field; `message_id` UNIQUE; `is_duplicate`, `duplicate_of`, `similarity_score`, `notification_sent`, `notification_date`; plus `is_copy`, `copy_of`, `copy_kind` (copy collapse) and `thread_id` (reserved).
 - **`addresses` + `email_recipients`:** To/Cc/Bcc are normalized, one row per address and one row per (email, address, type, position).
 - **`attachments`**, **`parse_failures`** (mirrored to `error_log.txt`), and **`threads`** (reserved).
+- **`entities`** (NER bonus): `email_id`, `text`, `label` (PERSON/ORG/DATE/GPE), `source` (body/forwarded/quoted)
+  and character offsets; UNIQUE on (email, source, offsets, label).
 
 Indexes: the required ones on `date`, `from_address` and `subject`, plus `(from_address, normalized_subject)`, `copy_key` and duplicate status.
 
-`sample_queries.sql` has 8 queries, each with its expected output and the actual result on this database: emails per sender, a date range, emails with CC, the largest CC lists, top recipients, failures by reason, emails per year, and duplicates with their originals.
+`sample_queries.sql` has 10 queries, each with its expected output and the actual result on this database: emails per sender, a date range, emails with CC, the largest CC lists, top recipients, failures by reason, emails per year, duplicates with their originals, and two NER queries (top organizations/places in body text; search for every email that mentions FERC).
 
 ---
 
@@ -232,6 +238,28 @@ Indexes: the required ones on `date`, `from_address` and `subject`, plus `(from_
   `rickya@calpine.com` "Calpine Daily Gas Nomination" (23 flagged in one group) and marketing mail from
   `_corolla@response.etracks.com`. We keep them flagged rather than add a rule the spec does not ask for.
 
+### Named-entity extraction (bonus, `--ner`)
+- **What runs.** spaCy `en_core_web_sm` with every component except `tok2vec` and `ner` disabled, over
+  `nlp.pipe` batches of 64. It processes the body, forwarded content and quoted content of the 15,678
+  emails left after copy collapse, and keeps PERSON, ORG, DATE and GPE.
+- **Where results go.** Results go to the `entities` table with a `source` column. Statistics use
+  `source = 'body'` only, so quoted and forwarded copies of the same text aren't counted twice; search can
+  use all three sources.
+- **Input cleaning.** The input is the stored text with quoted-printable leftovers removed and line breaks
+  kept, capped at 10,000 characters per field.
+- **Isolation and re-runs.** The stage is isolated: if spaCy or the model is missing, or NER fails, the
+  pipeline prints "NER skipped" and carries on. A re-run first deletes each email's old entity rows in the
+  same transaction, so no duplicates are created.
+- **List fix.** spaCy merges consecutive lines of a list into one entity (e.g. `CMS Marketing, Services and
+  Trading Company` + `Calpine Energy Services`). Entities are split at line breaks **only when every piece
+  has 2 or more words**, which fixes lists while keeping hard-wrapped names like `Kenneth\nLay` whole.
+- **Full-run results:**
+  - **Runtime:** 368 s (~6 min, 42.6 emails/s).
+  - **Volume:** 343,291 entities in 14,732 emails. By label: PERSON 143,992, ORG 109,498, DATE 57,859,
+    GPE 31,942. By source: body 142,153, forwarded 102,953, quoted 98,185.
+  - **Top body ORGs:** Enron, FERC, HPL, EES, PG&E (with errors, see below).
+  - **Top body PERSONs:** first names (Jim, Jeff, John), then `Daren J Farmer/HOU` and Elizabeth Sager.
+
 ### Notifications
 - **Template.** The text follows the spec template exactly (a test compares it word for word).
 - **Subject rule (no "Re: Re:").** The notice subject is built from the original email's subject. If it
@@ -252,7 +280,7 @@ Indexes: the required ones on `date`, `from_address` and `subject`, plus `(from_
 
 ## Testing
 
-There are 231 `pytest` tests. They cover:
+There are 243 `pytest` tests. They cover:
 - every parser module, using small string cases (timezones, bogus years, stacked subject prefixes, group syntax, Lotus names, repeated or malformed headers, encodings)
 - the database layer and statistics
 - copy collapse and the timezone stage
@@ -279,14 +307,30 @@ through review flags, not manually verified line by line.
 
 ## Known limitations and future work
 
-- **Bonuses not built** (deadline scope):
-  - *Incremental processing:* re-runs are safe (existing `message_id`s are skipped) but every file is
-    re-parsed. The next step is skipping known `source_file`s before parsing.
-  - *Thread reconstruction:* since In-Reply-To and References are always empty, the planned rule is the
-    same normalized subject, within 14 days, with at least one shared participant. Fixtures for it are
-    already written (F14a/b).
-  - *Named-entity extraction*, the *dashboard*, and a *full-dataset (517k) performance run*. The planned
-    approach is a multiprocessing parse pool with a single SQLite writer, WAL mode, batched inserts,
-    indexes built after load, and a serial-vs-parallel benchmark with an identical-output check.
+- **Bonus challenges: one of five implemented.**
+
+  | Bonus | Status | What exists / next step |
+  |---|---|---|
+  | Named-entity extraction | **Done** (`--ner`) | See "Named-entity extraction" above and its limitations below. |
+  | Thread reconstruction | Not done | The `thread_id` column and `threads` table exist but stay empty. Since In-Reply-To and References are always empty, the planned rule is the same normalized subject, within 14 days, with at least one shared participant. Fixtures are written (F14a/b). |
+  | Dashboard | Not done | Nothing built. |
+  | Incremental processing | Not done | Re-runs are safe (existing `message_id`s are skipped and notification state is kept), but every file is re-parsed. Next step: skip known `source_file`s before parsing. |
+  | Performance (full 517k dataset) | Not done | Only basic efficiency: 1,000-row batched inserts, dedup blocking by sender and subject, and a length pre-filter before fuzzy matching. Planned: a multiprocessing parse pool with a single SQLite writer, WAL mode, indexes built after load, and a serial-vs-parallel benchmark with an identical-output check. |
+
+  `--no-incremental`, `--full-reingest`, `--no-threads` and `--thread-window-days` appear in `--help` but
+  are reserved for the unbuilt bonuses and currently have **no effect**.
+- **NER limitations on messy email text** (spaCy's small model was trained on news and web text, not email):
+  - **Fragments mislabelled.** Common words and fragments are mislabelled: `FYI` and `Daren` as ORG, `TX` as
+    ORG (not GPE), `MMBtu` and `Subject` as PERSON, `Password` as PERSON, and URLs absorbed into ORG spans.
+  - **Lotus routing suffixes.** Names keep their Lotus Notes routing suffix (`Daren J Farmer/HOU`,
+    `John Arnold/HOU`), and first names alone (`Jim`, `Jeff`) dominate the PERSON counts. No name
+    normalization or alias resolution is done.
+  - **Legal suffixes.** These are often mislabelled: in `Calpine Energy Services, L.P.` the company is found
+    as ORG but `L.P.` is tagged GPE.
+  - **Line merging.** This is fixed only when every line has 2+ words; a one-word line (e.g. `Enron`)
+    next to another entity can still be merged into it.
+  - **Long fields.** Fields over 10,000 characters are truncated before NER.
+  - **No accuracy figure.** There is no precision or recall measurement; quality was checked by spot-checking
+    emails and by the F15 fixtures (which must find at least their listed entities).
 - **Robustness run** on a whole unused mailbox was planned but not run.
 - **No alias resolution**, so the same person under two addresses counts as two senders or participants.

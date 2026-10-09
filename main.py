@@ -3,6 +3,7 @@
     python main.py                                   # ingest -> copies -> dedup -> report -> .eml drafts
     python main.py --send-live --redirect-to me@x    # same, then send (max 10, y/N confirmation)
     python main.py --sync-send-log                   # mark sends made through Claude Code (route b)
+    python main.py --ner                             # + named-entity extraction (bonus)
     python main.py --help
 """
 from __future__ import annotations
@@ -53,6 +54,22 @@ def main(argv: list[str] | None = None) -> int:
     print(f"        {tz_stats.format() if tz_stats else 'Timezone-shifted copy stage: disabled'}")
     print(f"[S7-S8] {dedup_stats.groups:,} duplicate groups | {dedup_stats.flagged:,} flagged | "
           f"avg group size {dedup_stats.avg_group_size} -> {cfg.report} ({report_rows:,} rows)")
+
+    if cfg.ner:
+        stage("ner")
+        try:  # bonus stage: a failure here never stops the core pipeline
+            from pipeline.db import connect
+            from pipeline.entities import run_ner
+
+            conn = connect(cfg.db)
+            ner_stats = run_ner(conn)
+            conn.close()
+            summary["ner"] = ner_stats.to_dict()
+            print(f"[S10]   {ner_stats.format()}")
+        except Exception as exc:
+            summary["ner"] = {"error": f"{type(exc).__name__}: {exc}"}
+            print(f"[S10]   NER skipped ({type(exc).__name__}: {exc}); core pipeline continues")
+        done("ner")
 
     stage("notify")
     notify = run_notify(cfg)

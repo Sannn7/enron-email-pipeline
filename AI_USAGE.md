@@ -5,7 +5,7 @@
 I used two AI tools, each with a separate job.
 
 1. **Claude Code** (the Code tab of the Claude desktop app on macOS, running Claude Opus 5.5, `claude-opus-5-5`) for all implementation. Inside the project, Claude Code wrote the code, ran the tests and the pipeline, and inspected the dataset. The Claude Code CLI isn't installed on this machine, so the desktop app was the only coding tool.
-2. **Claude chat** (claude.ai, Claude Opus 5.5) as a planning and review assistant. I hadn't used an agentic coding tool for a project like this before, so I used a separate chat to learn how to structure prompts, to review Claude Code's plans and results before approving them, and to help draft prompts, which I then adjusted and sent.
+2. **Claude chat** (claude.ai, Claude Opus 5.5) as a thinking partner. I used it to structure my thoughts, lay out the options and tradeoffs for each decision, and organize my prompts before sending them to Claude Code. It helped me reason through choices; the decisions themselves were mine.
 
 My role was to direct the project: I set the requirements, made the design decisions, reviewed each step's output before approving the next one, ran the installs, set up the Gmail credentials, and ran and confirmed every live send myself.
 
@@ -57,7 +57,7 @@ These are the main calls I made. In most cases Claude Code laid out options and 
 3. **Live recipients (D7).** The real recipients are old Enron addresses, so before building live mode I emailed the AISH team to ask whether to redirect. Ali confirmed I could redirect to my own test inbox, so `--redirect-to` is mandatory in live mode and both live sends went to my own Gmail.
 4. **Both MCP routes (D6).** I chose to support the pipeline calling MCP programmatically and Claude Code calling `send_email` directly, because section 4.4 asks for prompts showing the AI using the tool.
 5. **The timezone artifact.** When Claude Code reported that about half the flagged duplicates were the same email exported with a 10 or 11 hour offset, I treated it like the folder copy problem. I asked for it as a separate, switchable stage with strict conditions (different folders, identical body, whole hour shift of 12 or less, matching minutes and seconds), so it wouldn't break the copy definition shared with the profile script.
-6. **Scope under deadline.** I started out aiming for all five bonuses, then cut NER, the dashboard and the full dataset run once the deadline was clear, so the core pipeline and every required deliverable were done properly. They're listed in the README as future work.
+6. **Scope under deadline.** I prioritized the core pipeline and every required deliverable first. Once the core was done and committed, I chose NER as my bonus, since it builds on my NLP and AI background. I left thread reconstruction, incremental processing, the dashboard and the full 500K performance run as future work, listed in the README.
 7. **Not sending everything.** I verified live mode with two capped sends to a test inbox instead of sending all 301 notifications. The full set exists as dry-run drafts in `output/replies/`.
 
 ## Iterations and debugging
@@ -96,6 +96,26 @@ In lines of code, the AI wrote roughly 95%. My work was directing the project: t
 6. **Context doesn't travel between tools.** Anything decided in one tool has to be written into the project (PLAN.md) or the prompt, or the other tool simply won't know it.
 7. **Harder than expected:** the Enron data itself (CRLF/LF mix, copies with different Message-IDs, timezone shifted exports, bogus 1980 dates, address aliases) and MCP setup details (version pin, Claude Code config scope, interactive prompts).
 8. **Credentials need care in an AI session.** The App Password ended up visible to the AI tools while I was setting it up. It was never committed to the repo, and I rotated it after setup.
+
+## Named-entity extraction bonus
+
+Added after the core submission, behind its own `--ner` flag, so the core pipeline is unaffected if it fails (a test runs `main.py --ner` with spaCy made unavailable and checks every core output is still produced).
+
+**How I prompted it.** One prompt set out the whole contract:
+- spaCy `en_core_web_sm` with the components NER doesn't need disabled, and `nlp.pipe` batching
+- body, forwarded and quoted text of the emails left after copy collapse
+- PERSON/ORG/DATE/GPE stored in an `entities` table with a source column, "so statistics can use body only while search can use everything"
+- re-runs must not create duplicate rows
+- tests on small samples, plus the F15 fixture
+- **time it on 500 emails and project the full runtime before running everything**, then wait for my go-ahead
+
+**What happened.**
+- The 500-email timing ran at about 70 emails/s and projected about 4 minutes. Claude Code warned that heavier-forwarding mailboxes would be slower, and the full run took 6.1 minutes (42.6 emails/s).
+- It produced 343,291 entities across 14,732 emails.
+- **The NER fixture failed first.** F15a expects `Calpine Energy Services, L.P.` as an organization, but spaCy returned `CMS Marketing, Services and Trading Company\nCalpine Energy Services` as one ORG, because consecutive lines of a company list run together. Instead of loosening the test, I asked Claude Code to show what the model tagged for that line. Then I chose between two options: split entities at line breaks **only when every piece has 2 or more words**. That separates list lines but keeps a hard-wrapped name like `Kenneth\nLay` as one PERSON, and both cases have tests. The remaining `L.P.` → GPE mislabel is documented as a limitation.
+- Spot-checking real emails showed the model's weaknesses on email text: `FYI` and first names tagged as ORG, `MMBtu` as PERSON, Lotus routing suffixes kept (`Daren J Farmer/HOU`). These are listed in the README rather than patched with ad-hoc rules.
+
+**Who did what.** I chose the scope, the source column design, the line-break rule, and when to run. Claude Code wrote `pipeline/entities.py`, the schema change, the tests, and the two NER sample queries.
 
 ---
 

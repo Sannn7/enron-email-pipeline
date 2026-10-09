@@ -81,3 +81,32 @@ FROM emails d
 JOIN emails o ON o.message_id = d.duplicate_of
 WHERE d.is_duplicate = 1
 ORDER BY d.from_address, d.date;
+
+-- 9. (NER bonus) Most-mentioned organizations and places in BODY text only (statistics use body only,
+--    so quoted/forwarded copies of the same text are not counted twice). Requires `python main.py --ner`.
+-- Expected: label, entity text, number of distinct emails mentioning it, largest first.
+-- Result: ORG Enron 1435 | GPE Houston 688 | ORG Daren 482 | GPE Texas 466 | ORG FYI 434 | ORG FERC 376
+--         ("Daren" and "FYI" tagged ORG are model errors; see README limitations)
+SELECT label, text, COUNT(DISTINCT email_id) AS emails
+FROM entities
+WHERE source = 'body' AND label IN ('ORG', 'GPE')
+GROUP BY label, text
+ORDER BY emails DESC
+LIMIT 6;
+
+-- 10. (NER bonus) Search: emails that mention FERC anywhere (body, forwarded or quoted text).
+-- Expected: matching emails with date and subject; the second query shows where the mentions sit.
+-- Result: first rows from steffes-j sent_items/532. 2001-08-08 "RE: California Refund Proceeding...",
+--         550. "RE: meeting with FERC on MA rule", 559. "RE: Negative CTC at FERC"
+--         Totals: 749 emails; mentions body 893 | forwarded 488 | quoted 1012
+SELECT e.source_file, e.date, e.subject
+FROM emails e
+WHERE e.id IN (SELECT email_id FROM entities WHERE label = 'ORG' AND text = 'FERC')
+  AND e.from_address LIKE '%steffes%'
+ORDER BY e.date
+LIMIT 3;
+
+SELECT COUNT(DISTINCT email_id) AS emails,
+       SUM(source = 'body') AS in_body, SUM(source = 'forwarded') AS in_forwarded, SUM(source = 'quoted') AS in_quoted
+FROM entities
+WHERE label = 'ORG' AND text = 'FERC';

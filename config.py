@@ -36,6 +36,7 @@ class Config:
     threads: bool = True
     thread_window_days: int = 14
     batch_size: int = 1000
+    ner: bool = False
 
     @property
     def replies_dir(self) -> Path:
@@ -86,6 +87,8 @@ def build_parser() -> argparse.ArgumentParser:
     g.add_argument("--no-threads", dest="threads", action="store_false")
     g.add_argument("--thread-window-days", type=int, default=d.thread_window_days)
     g.add_argument("--batch-size", type=int, default=d.batch_size)
+    g.add_argument("--ner", action="store_true",
+                   help="named-entity extraction with spaCy (bonus; needs spacy + en_core_web_sm)")
     return p
 
 
@@ -127,4 +130,5 @@ def parse_args(argv: list[str] | None = None) -> Config:
         threads=args.threads,
         thread_window_days=args.thread_window_days,
         batch_size=args.batch_size,
+        ner=args.ner,
     )

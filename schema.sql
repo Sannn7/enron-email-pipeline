@@ -82,6 +82,18 @@ CREATE TABLE IF NOT EXISTS threads (
     last_date          TEXT NOT NULL
 );
 
+-- named entities (bonus, filled only by `python main.py --ner`)
+CREATE TABLE IF NOT EXISTS entities (
+    id         INTEGER PRIMARY KEY,
+    email_id   INTEGER NOT NULL REFERENCES emails (id) ON DELETE CASCADE,
+    text       TEXT    NOT NULL,                          -- entity text, whitespace collapsed
+    label      TEXT    NOT NULL CHECK (label IN ('PERSON', 'ORG', 'DATE', 'GPE')),
+    source     TEXT    NOT NULL CHECK (source IN ('body', 'forwarded', 'quoted')),
+    start_char INTEGER NOT NULL,                          -- offsets in the NER input text of that field
+    end_char   INTEGER NOT NULL,
+    UNIQUE (email_id, source, start_char, end_char, label)
+);
+
 -- required indexes
 CREATE INDEX IF NOT EXISTS idx_emails_date         ON emails (date);
 CREATE INDEX IF NOT EXISTS idx_emails_from_address ON emails (from_address);
@@ -92,3 +104,5 @@ CREATE INDEX IF NOT EXISTS idx_emails_copy_key     ON emails (copy_key);
 CREATE INDEX IF NOT EXISTS idx_emails_duplicate    ON emails (is_duplicate, notification_sent);
 CREATE INDEX IF NOT EXISTS idx_emails_thread       ON emails (thread_id);
 CREATE INDEX IF NOT EXISTS idx_recipients_address  ON email_recipients (address_id);
+CREATE INDEX IF NOT EXISTS idx_entities_label_text ON entities (label, text);
+CREATE INDEX IF NOT EXISTS idx_entities_email      ON entities (email_id);
