@@ -31,8 +31,6 @@ class Config:
     sync_send_log: bool = False
     mcp_config: Path = Path("mcp_config.json")
     # bonuses
-    incremental: bool = True
-    full_reingest: bool = False
     batch_size: int = 1000
     ner: bool = False
 
@@ -80,8 +78,6 @@ def build_parser() -> argparse.ArgumentParser:
                    help="mark notifications sent from output/send_log.csv (route b)")
 
     g = p.add_argument_group("bonuses")
-    g.add_argument("--no-incremental", dest="incremental", action="store_false")
-    g.add_argument("--full-reingest", action="store_true")
     g.add_argument("--batch-size", type=int, default=d.batch_size)
     g.add_argument("--ner", action="store_true",
                    help="named-entity extraction with spaCy (bonus; needs spacy + en_core_web_sm)")
@@ -121,8 +117,6 @@ def parse_args(argv: list[str] | None = None) -> Config:
         send_delay=args.send_delay,
         sync_send_log=args.sync_send_log,
         mcp_config=args.mcp_config,
-        incremental=args.incremental,
-        full_reingest=args.full_reingest,
         batch_size=args.batch_size,
         ner=args.ner,
     )

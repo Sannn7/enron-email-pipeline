@@ -13,7 +13,6 @@ def test_defaults_are_safe():
     assert c.dedup_mode == "collapse"
     assert c.tz_collapse is True
     assert c.mailboxes == MAIN_MAILBOXES
-    assert c.incremental
     assert str(c.replies_dir) == "output/replies"
     assert str(c.send_log) == "output/send_log.csv"
 
@@ -38,8 +37,7 @@ def test_invalid_values_rejected(argv):
 
 def test_mailboxes_and_flags():
     c = parse_args(["--mailboxes", "a-b, c-d", "--dedup-mode", "literal",
-                    "--no-incremental", "--no-tz-collapse"])
+                    "--no-tz-collapse"])
     assert c.mailboxes == ["a-b", "c-d"]
     assert c.dedup_mode == "literal"
-    assert not c.incremental
     assert c.tz_collapse is False
